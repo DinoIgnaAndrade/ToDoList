@@ -14,7 +14,7 @@ const InputItem = ({
     return(
         <Pressable
         style={styles.press} 
-        onPress={() => setVisibleModalInput(!visibleModalInput)}
+        onPress={() => setVisibleModalInput(true)}
         >
             <View style={styles.input}>
                 <BlurView 
@@ -39,14 +39,13 @@ const styles = StyleSheet.create({
         marginTop:'auto',
     },
     input: {
-        fontSize:50,
+        fontSize:60,
         borderRadius:100,
 
-        backgroundColor:'rgba(57,87,92, 0.4)',
         color:'#1AC2DB',
     },
     blur: {
-        padding:20,
+        padding:5,
         borderRadius:100,
     }
   });
