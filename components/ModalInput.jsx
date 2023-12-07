@@ -1,12 +1,21 @@
 import { View, Text, TextInput, StyleSheet, Pressable, Modal } from 'react-native';
-import { MdCancel } from "react-icons/md";
-import { IoMdCheckmarkCircle } from "react-icons/io";
+
 import { BlurView } from 'expo-blur';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { faCircleXmark, faCircleCheck } from '@fortawesome/free-solid-svg-icons';
+
 
 const ModalInput = ({
     visibleModalInput,
     setVisibleModalInput,
     animatioTypeProp,
+
+    title,
+    text,
+    onChangeTitleHandler,
+    onChangeTextHandler,
+    addItemHandler,
+
 }
 ) => {
     return (
@@ -14,25 +23,40 @@ const ModalInput = ({
             animationType={animatioTypeProp}
             visible={visibleModalInput}
             transparent={true}>
-            <BlurView style={styles.blur}>
+            <BlurView
+            intensity={50} 
+            style={styles.blur}>
                 <View style={styles.container}>
-
-                    {console.log(visibleModalInput)}
 
                     <TextInput
                         style={styles.title}
-                        placeholder='Titulo' />
+                        placeholder='Titulo'
+                        onChangeText={onChangeTitleHandler}
+                        value={title}
+                         />
+
+
                     <TextInput
                         style={styles.bodyText}
-                        placeholder='Agregar Texto' />
+                        placeholder='Agregar Texto' 
+                        onChangeText={onChangeTextHandler}
+                        value={text}
+                        />
+
 
                     <View style={styles.buttons}>
-                        <Pressable>
-                            <IoMdCheckmarkCircle color='#1BBCF2'  />
+                        <Pressable onPress={addItemHandler}>
+                            <FontAwesomeIcon 
+                            size={50}
+                            color='#1BBCF2'
+                            icon={faCircleCheck} />
                         </Pressable>
 
                         <Pressable onPress={() => setVisibleModalInput(false)}>
-                            <MdCancel color='#F2881B' />
+                            <FontAwesomeIcon 
+                            size={50}
+                            color='#F2881B'
+                            icon={faCircleXmark} />
                         </Pressable>
                     </View>
 
@@ -42,14 +66,16 @@ const ModalInput = ({
     );
 };
 
+export default ModalInput;
+
 const styles = StyleSheet.create({
     blur: {
-        marginTop: 300,
-        borderRadius: 100,
+        marginTop: 250,
+        borderRadius: 50,
     },
     container: {
         alignItems: 'center',
-        borderRadius: 100,
+        borderRadius: 50,
 
         backgroundColor: 'rgba(70, 104, 115,0.5)',
     },
@@ -83,5 +109,3 @@ const styles = StyleSheet.create({
 
 }
 );
-
-export default ModalInput;

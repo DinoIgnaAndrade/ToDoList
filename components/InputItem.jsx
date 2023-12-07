@@ -1,15 +1,22 @@
 import { View, Text, StyleSheet, Pressable } from 'react-native';
 import { BlurView } from 'expo-blur';
 
-import { AiFillPlusCircle } from "react-icons/ai";
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { faCirclePlus } from '@fortawesome/free-solid-svg-icons'
 import ModalInput from './ModalInput';
 
 
 const InputItem = ({
 
     visibleModalInput,
-    setVisibleModalInput
-   
+    setVisibleModalInput,
+
+    title,
+    text,
+    onChangeTitleHandler,
+    onChangeTextHandler,
+    addItemHandler,
+
     }) => {
     return(
         <Pressable
@@ -18,21 +25,31 @@ const InputItem = ({
         >
             <View style={styles.input}>
                 <BlurView 
-                    intensity={50}
+                    intensity={100}
                     style={styles.blur}>
                     <ModalInput
                         visibleModalInput={visibleModalInput}
                         setVisibleModalInput={setVisibleModalInput}
                         animatioTypeProp='fade'
+
+                        title={title}
+                        text={text}
+                        onChangeTitleHandler={onChangeTitleHandler}
+                        onChangeTextHandler={onChangeTextHandler}
+                        addItemHandler={addItemHandler}
                     />
-                    {console.log(visibleModalInput)}
-                    <AiFillPlusCircle />
+                    <FontAwesomeIcon
+                    size={50}  
+                    color='#1AC2DB'
+                    icon={faCirclePlus} />
                 </BlurView>
             </View>
         </Pressable>
     ); 
 };
 
+
+export default InputItem;
 
 const styles = StyleSheet.create({
     press: {
@@ -49,5 +66,3 @@ const styles = StyleSheet.create({
         borderRadius:100,
     }
   });
-
-export default InputItem;
